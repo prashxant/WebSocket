@@ -6,3 +6,8 @@ tsConfig {
     "rootDir": "./src",
      "outDir": "./dist", 
     } 
+
+
+"scripts": {
+    "dev": "tsc -b && node ./dist/index.js"
+  },
