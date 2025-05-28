@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/prashxant/WebSocket#readme",
   "dependencies": {
-    "typescript": "^5.8.3"
+    "@types/ws": "^8.18.1",
+    "typescript": "^5.8.3",
+    "ws": "^8.18.2"
   }
 }

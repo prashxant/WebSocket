@@ -11,3 +11,5 @@ tsConfig {
 "scripts": {
     "dev": "tsc -b && node ./dist/index.js"
   },
+
+npm i ws @types/ws  
