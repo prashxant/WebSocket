@@ -1,29 +1,35 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 function App() {
 
   const [socket , setSocket] = useState()
+  const inputRef = useRef()
 
 
  function sendMessage (){
-      socket.send("ping")
+
+    if (!socket){
+      return
+    }
+    const message= inputRef.current.value
+    socket.send(message)
  }
 
 useEffect(()=>{
   const ws = new WebSocket("ws://localhost:8000")
   setSocket(ws)
 
-  ws.onmessage = (event) =>{
-      alert(event.data)
+  ws.onmessage = (ev) =>{
+      alert(ev.data)
   }
 },[])
 
   return (
     <div>
 
-      <input type="text" placeholder='Message...' />
+      <input ref={inputRef}type="text" placeholder='Message...' />
       <button onClick={sendMessage}>send</button>
     </div>
   )
