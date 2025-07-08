@@ -1,24 +1,18 @@
-
 import { WebSocketServer } from "ws";
 
-const wss = new WebSocketServer({port : 8000})
-
-
-//event handler
-  wss.on("connection",function(socket){
-
-    console.log("user conected")
+const wss = new WebSocketServer({port:8080});
 
 
 
-  socket.on("message",function(e){
+let c = 0
+wss.on("connection",(socket)=>{
 
-    if(e.toString() === "ping"){
+  c = c + 1;
+  console.log("user connected #" + c);
 
-      socket.send("pong")
-
-    }
-
+  socket.on("message",(message)=>{
+    console.log("message recivied" + message.toString())
   })
 
-  })
+
+})
