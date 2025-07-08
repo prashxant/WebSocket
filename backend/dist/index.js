@@ -4,12 +4,23 @@ const ws_1 = require("ws");
 const wss = new ws_1.WebSocketServer({ port: 8080 });
 let allSocket = [];
 wss.on("connection", (socket) => {
-    allSocket.push(socket);
     socket.on("message", (message) => {
-        console.log("message recivied" + message.toString());
-        for (let i = 0; i < allSocket.length; i++) {
-            const s = allSocket[i];
-            s.send(message.toString() + ": ent form server");
+        // @ts-ignore
+        var _a;
+        const parsedMessage = JSON.parse(message);
+        if (parsedMessage.type == "join") {
+            allSocket.push({
+                socket,
+                room: parsedMessage.payload.roomId
+            });
+        }
+        if (parsedMessage.type == "chat") {
+            const currentUserRoom = (_a = allSocket.find((x) => x.socket == socket)) === null || _a === void 0 ? void 0 : _a.room;
+            allSocket.forEach((user) => {
+                if (user.room == currentUserRoom) {
+                    user.socket.send(parsedMessage.payload.message);
+                }
+            });
         }
     });
 });
