@@ -11,7 +11,7 @@ function App() {
  function sendMessage (){
 
     if (!socket){
-      return
+        
     }
     const message= inputRef.current.value
     socket.send(message)
