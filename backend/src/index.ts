@@ -1,17 +1,19 @@
-import { WebSocketServer } from "ws";
+import { WebSocketServer,WebSocket } from "ws";
 
 const wss = new WebSocketServer({port:8080});
 
+let allSocket: WebSocket[] = []
 
-
-let c = 0
 wss.on("connection",(socket)=>{
 
-  c = c + 1;
-  console.log("user connected #" + c);
+  allSocket.push(socket)
 
   socket.on("message",(message)=>{
     console.log("message recivied" + message.toString())
+    for(let i = 0; i < allSocket.length ; i++){
+      const s = allSocket[i]
+      s.send(message.toString() + ": ent form server")
+    }
   })
 
 

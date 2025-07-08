@@ -2,8 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const ws_1 = require("ws");
 const wss = new ws_1.WebSocketServer({ port: 8080 });
-let c = 0;
+let allSocket = [];
 wss.on("connection", (socket) => {
-    c = c + 1;
-    console.log("user connected #" + c);
+    allSocket.push(socket);
+    socket.on("message", (message) => {
+        console.log("message recivied" + message.toString());
+        for (let i = 0; i < allSocket.length; i++) {
+            const s = allSocket[i];
+            s.send(message.toString() + ": ent form server");
+        }
+    });
 });
