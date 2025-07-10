@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/button";
+import { useNavigate } from "react-router-dom";
 
 export default function Room() {
   const [fadeIn, setFadeIn] = useState(false);
   const [roomCode , setRoomCode] = useState("")
+  const navigate = useNavigate()
 
   useEffect(() => {
     setFadeIn(true);
@@ -24,10 +26,10 @@ export default function Room() {
             value={roomCode}
             onChange={(e)=>{setRoomCode(e.target.value)}}
             type="text"
-            placeholder="Room Code"
+            placeholder="Enter Room Code"
             className="border border-gray-400 bg-black text-white text-3xl px-4 py-2 rounded-md transition-colors duration-300 hover:bg-white hover:text-black"
         />
-         <div className="p-4"> <Button text={"Join Room"} onClick={()=>{alert("room joined")}}/></div>
+         <div className="p-4"> <Button text={"Join"} onClick={() => navigate(`/chat/${roomCode}`)}/></div>
       </div>
     </div>
   );
