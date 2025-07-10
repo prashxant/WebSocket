@@ -6,7 +6,7 @@ interface ButtonProps {
 }
 
 export function Button (props : ButtonProps){
-  return <button className="bg-slate-200 cursor-pointer hover:bg-amber-200 text-3xl rounded-xl py-2 px-6" onClick={props.onClick} >
+  return <button className="bg-zinc-400 cursor-pointer hover:bg-amber-200 text-3xl rounded-xl py-2 px-6" onClick={props.onClick} >
     {props.text}
   </button>
 }
