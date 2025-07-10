@@ -3,6 +3,7 @@ import { Button } from "../components/button";
 
 export default function Room() {
   const [fadeIn, setFadeIn] = useState(false);
+  const [roomCode , setRoomCode] = useState("")
 
   useEffect(() => {
     setFadeIn(true);
@@ -20,6 +21,8 @@ export default function Room() {
       </div>
       <div className="mt-6 flex  items-center">
         <input
+            value={roomCode}
+            onChange={(e)=>{setRoomCode(e.target.value)}}
             type="text"
             placeholder="Room Code"
             className="border border-gray-400 bg-black text-white text-3xl px-4 py-2 rounded-md transition-colors duration-300 hover:bg-white hover:text-black"
